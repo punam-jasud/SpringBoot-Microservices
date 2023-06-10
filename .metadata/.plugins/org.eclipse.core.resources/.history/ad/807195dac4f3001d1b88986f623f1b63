@@ -1,0 +1,5 @@
+package com.punam.order;
+
+public interface OrderRepository {
+
+}

@@ -1,0 +1,23 @@
+package com.punam.product.entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+public class Product {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long prodctId;
+
+	@Column(name = "PRODUCT_NAME")
+	private String productName;
+
+	@Column(name = "PRICE")
+	private long price;
+
+	@Column(name = "QUANTITY")
+	private long quantity;
+
+}

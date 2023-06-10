@@ -1,0 +1,5 @@
+package com.punam.order.service;
+
+public interface OrderService {
+
+}

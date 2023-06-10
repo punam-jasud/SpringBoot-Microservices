@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "5345839d-8a37-489c-a5c8-6d4458e50ad8",
+		"name": "Microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"MacBook\",\r\n    \"price\": 18000,\r\n    \"quantity\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reduceQuantity",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/reduceQuantity/1?quantity=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"reduceQuantity",
+						"1"
+					],
+					"query": [
+						{
+							"key": "quantity",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "placeOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 2,\r\n    \"totalAmount\": 2000,\r\n    \"quantity\": 2,\r\n    \"paymentMode\": \"CASH\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/orders/placeOrder",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders",
+						"placeOrder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"MacBook\",\r\n    \"price\": 18000,\r\n    \"quantity\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

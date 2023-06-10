@@ -1,0 +1,38 @@
+package com.punam.order.service;
+
+import java.time.Instant;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.punam.order.entity.Order;
+import com.punam.order.model.OrderRequest;
+import com.punam.order.repository.OrderRepository;
+
+import lombok.extern.log4j.Log4j2;
+
+@Service
+@Log4j2
+public class OrderServiceImpl implements OrderService{
+	
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Override
+	public long placeOrder(OrderRequest orderRequest) {
+		
+		log.info("Placing order for : {}", orderRequest);
+		
+		Order order = Order.builder()
+						.productId(orderRequest.getProductId())
+						.quantity(orderRequest.getQuantity())
+						.amount(orderRequest.getTotalAmount())
+						.orderDate(Instant.now())
+						.orderStatus("CREATED")
+						.build();
+						
+		
+		return 0;
+	}
+
+}

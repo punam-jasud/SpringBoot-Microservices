@@ -1,0 +1,78 @@
+version: '3.9'
+
+services:
+  serviceregistry:
+    image: 'punamjasud/serviceregistry:0.0.1'
+    container_name: serviceregistry
+    ports:
+     - '8761:8761'
+  configserver:
+    image: 'punamjasud/configserver:latest'
+    container_name: configserver
+    ports:
+     - '9296:9296'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://configserver:9296/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    depends_on:
+     - serviceregistry
+  cloudgateway:
+    image: 'punamjasud/cloudgateway:latest'
+    container_name: cloudgateway
+    ports:
+     - '9090:9090'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+    depends_on:
+      configserver:
+        condition: service_healthy
+  productservice:
+    image: 'punamjasud/productservice:latest'
+    container_name: productservice
+    ports:
+     - '8080:8080'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - MYSQL_HOST=192.168.1.2
+      - MYSQL_PORT=3306
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+    depends_on:
+      configserver:
+        condition: service_healthy
+  paymentservice:
+    image: 'punamjasud/paymentservice:latest'
+    container_name: paymentservice
+    ports:
+     - '8082:8082'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - MYSQL_HOST=192.168.1.2
+      - MYSQL_PORT=3306
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+    depends_on:
+      configserver:
+        condition: service_healthy
+  orderdervice:
+    image: 'punamjasud/orderdervice:latest'
+    container_name: orderdervice
+    ports:
+     - '8081:8081'
+    environment:
+      - EUREKA_SERVER_ADDRESS=http://serviceregistry:8761/eureka
+      - CONFIG_SERVER_URL=configserver
+      - MYSQL_HOST=192.168.1.2
+      - MYSQL_PORT=3306
+      - MYSQL_USERNAME=root
+      - MYSQL_PASSWORD=root
+    depends_on:
+      configserver:
+        condition: service_healthy

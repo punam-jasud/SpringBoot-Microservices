@@ -1,0 +1,10 @@
+package com.punam.product.entity;
+
+public class Product {
+	
+	private long prodctId;
+	private String productName;
+	private long price;
+	private long quantity;
+
+}

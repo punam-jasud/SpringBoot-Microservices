@@ -1,0 +1,5 @@
+package com.punam.product.model;
+
+public class ErrorResponse {
+
+}

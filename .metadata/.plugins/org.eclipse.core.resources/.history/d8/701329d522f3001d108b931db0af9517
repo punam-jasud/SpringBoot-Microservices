@@ -1,0 +1,22 @@
+package com.punam.product.service;
+
+import org.springframework.stereotype.Service;
+
+import com.punam.product.entity.Product;
+import com.punam.product.model.ProductRequest;
+
+import lombok.extern.log4j.Log4j2;
+
+@Service
+@Log4j2
+public class ProductServiceImpl implements ProductService{
+
+	@Override
+	public Long addProduct(ProductRequest request) {
+		//log.info("Adding Product..");
+		
+		Product product = Product.builder()
+			
+	}
+
+}

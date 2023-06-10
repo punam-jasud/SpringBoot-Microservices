@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: PAYMENT-SERVICE
+  config:
+    import: configserver:http://${CONFIG_SERVER_URL:localhost:9296}
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:KrishNam}:${MYSQL_PORT:3306}/paymentdb
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_ROOT_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    hibernate:
+      ddl-auto: update
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
